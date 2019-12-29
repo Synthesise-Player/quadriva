@@ -1,2 +1,2 @@
-# quadriva
+# Quadriva
 Spotify music quiz
