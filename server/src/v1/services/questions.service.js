@@ -9,6 +9,7 @@ const getQuestions = async playlistId => {
       const releaseYear = new Date(releaseDate).getFullYear();
       return {
         id,
+        message: 'What year was this album released?',
         previewUrl,
         answer: releaseYear,
         incorrectAnswers: generateIncorrectAnswers(releaseYear),
