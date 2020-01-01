@@ -3,9 +3,10 @@ import React from 'react';
 import { search } from '../../utils/apiRequests';
 
 export default class Search extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
-    this.state = { playlists: [] };
+    const { setPlaylist } = props;
+    this.state = { playlists: [], setPlaylist };
   }
 
   handleSubmit = async (e) => {
@@ -31,7 +32,7 @@ export default class Search extends React.Component {
     let playlists;
     if (this.state) {
       playlists = this.state.playlists.map(({ name, id, imgUrl }) => (
-        <div role="button" tabIndex={0} onClick={() => alert(id)} onKeyPress={() => alert(id)}>
+        <div role="button" tabIndex={0} onClick={() => this.state.setPlaylist(id)} onKeyPress={() => alert(id)}>
           <h1>{name}</h1>
           <img src={imgUrl} alt={id} />
         </div>

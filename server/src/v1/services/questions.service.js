@@ -1,6 +1,15 @@
 const { getPlaylistTracks } = require('./spotify.service');
 
-const getQuestions = async playlistId => {
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * Math.floor(max - min)) + min;
+}
+
+const generateIncorrectAnswers = (n) => {
+  const random = [1, 1, 1].map((_) => getRandomInt(-5, 5));
+  return random.map((r) => r + n);
+};
+
+const getQuestions = async (playlistId) => {
   const response = await getPlaylistTracks(playlistId);
   return response.tracks.items
     .filter(({ track }) => track.preview_url)
@@ -17,15 +26,6 @@ const getQuestions = async playlistId => {
       };
     });
 };
-
-const generateIncorrectAnswers = n => {
-  const random = [1,1,1].map(_ => getRandomInt(-5, -1));
-  return random.map(r => r + n);
-};
-
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * Math.floor(max - min)) + min;
-}
 
 module.exports = {
   getQuestions,

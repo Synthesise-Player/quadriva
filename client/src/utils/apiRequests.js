@@ -5,6 +5,9 @@ const { origin } = config;
 
 const search = async (query) => axios.get(`${origin}/api/v1/search?q=${query}`);
 
+const getQuestion = async (id) => axios.get(`${origin}/api/v1/playlists/${id}/questions`);
+
 export {
   search,
+  getQuestion,
 };
