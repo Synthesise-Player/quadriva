@@ -47,6 +47,21 @@ const search = async (q) => {
   return rp(options);
 };
 
+const getPlaylistTracks = async (playlistId) => {
+  const tokenId = await getTokenId();
+  const options = {
+    uri: `https://api.spotify.com/v1/playlists/${playlistId}?fields=tracks.items.track(id%2Calbum(release_date%2Cimages)%2Cpreview_url)`,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${tokenId}`,
+    },
+    json: true,
+  };
+  return rp(options);
+};
+
 module.exports = {
   search,
+  getPlaylistTracks,
 };
