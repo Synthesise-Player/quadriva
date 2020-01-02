@@ -50,7 +50,21 @@ const search = async (q) => {
 const getPlaylistTracks = async (playlistId) => {
   const tokenId = await getTokenId();
   const options = {
-    uri: `https://api.spotify.com/v1/playlists/${playlistId}?fields=tracks.items.track(id%2Calbum(release_date%2Cimages)%2Cpreview_url)`,
+    uri: `https://api.spotify.com/v1/playlists/${playlistId}?fields=tracks.items.track(id%2Calbum(release_date%2Cimages)%2Cpreview_url%2Cname%2Cartists.id)`,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${tokenId}`,
+    },
+    json: true,
+  };
+  return rp(options);
+};
+
+const getRecommendations = async (artistSeed, trackSeed) => {
+  const tokenId = await getTokenId();
+  const options = {
+    uri: `https://api.spotify.com/v1/recommendations?market=US&seed_artists=${artistSeed}&seed_tracks=${trackSeed}&min_energy=0.4&min_popularity=10`,
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
@@ -64,4 +78,5 @@ const getPlaylistTracks = async (playlistId) => {
 module.exports = {
   search,
   getPlaylistTracks,
+  getRecommendations,
 };
