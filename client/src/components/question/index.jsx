@@ -4,36 +4,40 @@ import ReactPlayer from 'react-player';
 import { getQuestion } from '../../utils/apiRequests';
 
 const getMusic = (id) => {
-  console.log(id);
   return <ReactPlayer url={id} playing />;
 };
 
 export default class Question extends React.Component {
   constructor(props) {
     super();
-    const { playlist } = props;
-    this.state = { playlist, stage: 0 };
-    getQuestion(playlist)
+    const { tracks } = props;
+    this.state = { stage: 0 };
+    if (tracks.length) {
+      getQuestion(tracks[0])
       .then((response) => {
         this.setState({
-          question: response.data[Math.floor(Math.random() * response.data.length)],
+          question: response.data,
+          tracks,
         });
       });
+    }
   }
 
   render() {
-    let answers;
-    const { stage, playlist, question } = this.state;
-    if (stage === 1) return <Question playlist={playlist} />;
+    const {
+      stage, question, tracks,
+    } = this.state;
+    if (stage === 1) return <Question tracks={tracks.slice(1, tracks.length)} />;
+
     let q;
-    if (question) {
+    if (question && tracks.length) {
       const { answer, incorrectAnswers } = question;
       const answerStrings = [
         <p className="text-success">{answer}</p>,
         ...incorrectAnswers.map((s) => <p className="text-danger">{s}</p>),
       ];
 
-      answers = (
+      const answers = (
         <div className="container">
           <div className="row">
             <div className="col-sm">
@@ -63,7 +67,12 @@ export default class Question extends React.Component {
       );
     }
     return (
-      <div role="button" tabIndex={0} onKeyPress={() => { this.setState({ stage: this.state.stage += 1 }); }} onClick={() => { this.setState({ stage: this.state.stage += 1 }); }}>
+      <div
+        role="button"
+        tabIndex={0}
+        onKeyPress={() => { this.setState({ stage: this.state.stage += 1 }); }}
+        onClick={() => { this.setState({ stage: this.state.stage += 1 }); }}
+      >
         {q}
       </div>
     );

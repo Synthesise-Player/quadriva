@@ -8,6 +8,7 @@ const app = express();
 const port = 4200;
 
 app.use(cors());
+app.use(express.json());
 
 app.use('/api/v1/', v1Routes);
 app.get('/', (req, res) => res.send('Hello World!'));

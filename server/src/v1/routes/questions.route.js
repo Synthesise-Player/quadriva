@@ -4,9 +4,11 @@ const { questionsController } = require('../controllers');
 
 const router = express.Router();
 
-router.get('/playlists/:playlistId/questions', async (req, res) => {
-  const { playlistId } = req.params;
-  const questions = await questionsController.getQuestions(playlistId);
+router.post('/', async (req, res) => {
+  const { track } = req.body;
+  const questions = await questionsController.getQuestions(track);
+  // const d2 = new Date();
+  // console.log(3, d2.getTime());
   res.status(200).send(questions);
 });
 

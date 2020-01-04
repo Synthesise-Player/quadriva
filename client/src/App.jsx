@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import Search from './components/search';
 import Question from './components/question';
+import { getTracks } from './utils/apiRequests';
 
 export default class App extends React.Component {
   constructor() {
@@ -13,18 +14,20 @@ export default class App extends React.Component {
   }
 
   setPlaylist(id) {
-    this.setState({ playlist: id });
+    getTracks(id).then(({ data }) => {
+      this.setState({ tracks: data });
+    });
   }
 
   render() {
-    const { playlist } = this.state;
+    const { tracks } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           <h1>Quadrivia</h1>
-          {!playlist ? <img src={logo} className="App-logo" alt="logo" /> : null}
-          {!playlist ? <Search setPlaylist={this.setPlaylist.bind(this)}/> : null}
-          {playlist ? <Question playlist={playlist} /> : null}
+          {!tracks ? <img src={logo} className="App-logo" alt="logo" /> : null}
+          {!tracks ? <Search setPlaylist={this.setPlaylist.bind(this)}/> : null}
+          {tracks ? <Question tracks={tracks} /> : null}
         </header>
       </div>
     );

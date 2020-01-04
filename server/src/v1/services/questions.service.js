@@ -40,15 +40,13 @@ const getTitleQuestion = async (track) => {
   };
 };
 
-const getQuestions = async (playlistId) => {
-  const response = await getPlaylistTracks(playlistId);
-  const validTracks = response.tracks.items.slice(0, 20)
-    .filter(({ track }) => track.preview_url);
+const getRandomQuestionGenerator = () => {
   const questionTypes = [getYearQuestion, getTitleQuestion];
-  return Promise.all(validTracks.map(({ track }) => {
-    const i = Math.floor(Math.random() * questionTypes.length);
-    return questionTypes[i](track);
-  }));
+  return questionTypes[Math.floor(Math.random() * questionTypes.length)];
+}
+
+const getQuestions = track => {
+  return getRandomQuestionGenerator()(track);
 };
 
 module.exports = {
