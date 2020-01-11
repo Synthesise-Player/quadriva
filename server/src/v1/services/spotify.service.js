@@ -77,8 +77,23 @@ const getRecommendations = async (artistSeed, trackSeed) => {
   return rp(options);
 };
 
+const getRecommendedArtists = async (artistId) => {
+  const tokenId = await getTokenId();
+  const options = {
+    uri: `https://api.spotify.com/v1/artists/${artistId}/related-artists`,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${tokenId}`,
+    },
+    json: true,
+  };
+  return rp(options);
+};
+
 module.exports = {
   search,
   getPlaylistTracks,
   getRecommendations,
+  getRecommendedArtists,
 };

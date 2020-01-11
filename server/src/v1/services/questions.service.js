@@ -1,4 +1,13 @@
-const { getRecommendations } = require('./spotify.service');
+const { getRecommendations, getRecommendedArtists } = require('./spotify.service');
+
+function shuffle(arr) {
+  const a = arr;
+  for (let i = a.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * Math.floor(max - min)) + min;
@@ -12,6 +21,11 @@ const generateIncorrectAnswers = (n) => {
 const getIncorrectSongTitles = async (artistId, trackId) => {
   const { tracks } = await getRecommendations(artistId, trackId);
   return tracks.slice(0, 3).map(({ name }) => name);
+};
+
+const getIncorrectArtists = async (artistId) => {
+  const { artists } = await getRecommendedArtists(artistId);
+  return shuffle(artists).slice(0, 3).map(({ name }) => name);
 };
 
 const getYearQuestion = (track) => {
@@ -46,8 +60,26 @@ const getTitleQuestion = async (track) => {
   };
 };
 
+const getArtistQuestion = async (track) => {
+  const {
+    album: { images },
+    id,
+    preview_url: previewUrl,
+    artists: [artist],
+  } = track;
+  const incorrectAnswers = await getIncorrectArtists(artist.id);
+  return {
+    id,
+    message: 'Which artist does this track belong too?',
+    previewUrl,
+    answer: artist.name,
+    incorrectAnswers,
+    imgUrl: images[0].url,
+  };
+};
+
 const getRandomQuestionGenerator = () => {
-  const questionTypes = [getYearQuestion, getTitleQuestion];
+  const questionTypes = [getYearQuestion, getTitleQuestion, getArtistQuestion];
   return questionTypes[Math.floor(Math.random() * questionTypes.length)];
 };
 
