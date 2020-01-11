@@ -13,9 +13,20 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * Math.floor(max - min)) + min;
 }
 
-const generateIncorrectAnswers = (n) => {
-  const random = [1, 1, 1].map(() => getRandomInt(-5, 5));
-  return random.map((r) => r + n);
+const getIncorrectYears = (correctYear) => {
+  const maxDifferential = 7;
+  const currentYear = new Date().getFullYear();
+  const maxYear = Math.min(currentYear, correctYear + maxDifferential);
+  const minYear = correctYear - maxDifferential;
+  const lowerBound = getRandomInt(minYear, maxYear - maxDifferential);
+  const upperBound = lowerBound + maxDifferential;
+
+  const incorrectAnswers = new Set();
+  while (incorrectAnswers.size < 3) {
+    const r = getRandomInt(lowerBound, upperBound);
+    if (r !== correctYear) incorrectAnswers.add(r);
+  }
+  return [...incorrectAnswers];
 };
 
 const getIncorrectSongTitles = async (artistId, trackId) => {
@@ -42,7 +53,7 @@ const getYearQuestion = (track) => {
     message: 'What year was this album released?',
     previewUrl,
     answer: releaseYear,
-    incorrectAnswers: generateIncorrectAnswers(releaseYear),
+    incorrectAnswers: getIncorrectYears(releaseYear),
     imgUrl: images[0].url,
   };
 };
