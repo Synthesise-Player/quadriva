@@ -50,7 +50,7 @@ const search = async (q) => {
 const getPlaylistTracks = async (playlistId) => {
   const tokenId = await getTokenId();
   const options = {
-    uri: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?fields=items.track(album(release_date%2Cimages)%2Cpreview_url%2Cname%2Cartists%2Cid)`,
+    uri: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?fields=items.track(album(release_date%2Cimages%2Cname)%2Cpreview_url%2Cname%2Cartists%2Cid)`,
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
@@ -59,7 +59,6 @@ const getPlaylistTracks = async (playlistId) => {
     json: true,
   };
   const { items } = await rp(options);
-  // console.log(items)
   return items.filter(({ track }) => track.preview_url);
 };
 

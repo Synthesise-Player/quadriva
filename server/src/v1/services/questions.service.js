@@ -23,6 +23,12 @@ const getIncorrectSongTitles = async (artistId, trackId) => {
   return tracks.slice(0, 3).map(({ name }) => name);
 };
 
+const getIncorrectAlbums = async (artistId, trackId, albumName) => {
+  const { tracks } = await getRecommendations(artistId, trackId);
+  const albums = new Set(tracks.map(({ album: { name } }) => name));
+  return [...albums].filter((name) => name !== albumName).slice(0, 3);
+};
+
 const getIncorrectArtists = async (artistId) => {
   const { artists } = await getRecommendedArtists(artistId);
   return shuffle(artists).slice(0, 3).map(({ name }) => name);
@@ -78,8 +84,31 @@ const getArtistQuestion = async (track) => {
   };
 };
 
+const getAlbumQuestion = async (track) => {
+  const {
+    album: { images, name: albumName },
+    id: trackId,
+    preview_url: previewUrl,
+    artists: [artist],
+  } = track;
+  const incorrectAnswers = await getIncorrectAlbums(artist.id, trackId, albumName);
+  return {
+    trackId,
+    message: 'Which album does this track belong too?',
+    previewUrl,
+    answer: albumName,
+    incorrectAnswers,
+    imgUrl: images[0].url,
+  };
+};
+
 const getRandomQuestionGenerator = () => {
-  const questionTypes = [getYearQuestion, getTitleQuestion, getArtistQuestion];
+  const questionTypes = [
+    getYearQuestion,
+    getTitleQuestion,
+    getArtistQuestion,
+    getAlbumQuestion,
+  ];
   return questionTypes[Math.floor(Math.random() * questionTypes.length)];
 };
 
