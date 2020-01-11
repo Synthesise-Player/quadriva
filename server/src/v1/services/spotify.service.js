@@ -58,7 +58,7 @@ const getPlaylistTracks = async (playlistId) => {
     },
     json: true,
   };
-  const { items } = await rp(options)
+  const { items } = await rp(options);
   // console.log(items)
   return items.filter(({ track }) => track.preview_url);
 };

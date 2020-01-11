@@ -22,8 +22,11 @@ module.exports = {
   plugins: [
     'react',
     'jest',
+    'react-hooks',
   ],
   rules: {
     'no-console': 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
   },
 };

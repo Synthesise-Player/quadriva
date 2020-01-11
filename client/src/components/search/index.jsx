@@ -1,52 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { search } from '../../utils/apiRequests';
 
-export default class Search extends React.Component {
-  constructor(props) {
-    super();
-    const { setPlaylist } = props;
-    this.state = { playlists: [], setPlaylist };
-  }
+const Search = ({ setPlaylist }) => {
+  const [playlists, setPlaylists] = useState([]);
+  const [query, setQuery] = useState('');
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { query } = this.state;
     if (query !== '') {
-      const response = await search(query);
-      this.setState({
-        playlists: response.data.playlists.items.map((playlist) => ({
-          name: playlist.name,
-          id: playlist.id,
-          imgUrl: playlist.images[0].url,
-        })),
-      });
+      const { data } = await search(query);
+      setPlaylists(data.playlists.items.map(({ name, id, images }) => ({
+        name, id, imgUrl: images[0].url,
+      })));
     }
-  }
+  };
 
-  handleChange = (e) => {
-    this.setState({ query: e.target.value });
-  }
+  const handleChange = (e) => setQuery(e.target.value);
 
-  render() {
-    let playlists;
-    if (this.state) {
-      playlists = this.state.playlists.map(({ name, id, imgUrl }) => (
-        <div role="button" tabIndex={0} onClick={() => this.state.setPlaylist(id)} onKeyPress={() => alert(id)}>
-          <h1>{name}</h1>
-          <img src={imgUrl} alt={id} />
-        </div>
-      ));
-    }
+  const playlistsDiv = playlists.map(({ name, id, imgUrl }) => (
+    <div role="button" tabIndex={0} onClick={() => setPlaylist(id)} onKeyPress={() => setPlaylist(id)}>
+      <h1>{name}</h1>
+      <img src={imgUrl} alt={name} />
+    </div>
+  ));
 
-    return (
-      <div>
-        <form className="example">
-          <input type="text" onChange={this.handleChange} placeholder="Search.." name="search" />
-          <button type="submit" onClick={this.handleSubmit}>Search</button>
-        </form>
-        {playlists}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form className="example">
+        <input type="text" onChange={handleChange} placeholder="Search.." name="search" />
+        <button type="submit" onClick={handleSubmit}>Search</button>
+      </form>
+      {playlistsDiv}
+    </div>
+  );
+};
+
+Search.propTypes = {
+  setPlaylist: PropTypes.func.isRequired,
+};
+
+export default Search;

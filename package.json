@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
-    "test": "concurrently \"cd server && npm t\" \"cd client && npm t\""
+    "test": "concurrently \"cd server && npm t\" \"cd client && npm t\"",
+    "lint": "concurrently \"cd server && npm run lint\" \"cd client && npm run lint\""
   },
   "repository": {
     "type": "git",
