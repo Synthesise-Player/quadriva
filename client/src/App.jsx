@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Search, Question } from './components';
 import { getTracks } from './utils/apiRequests';
+import { shuffle } from './utils';
 
 export default () => {
   const [tracks, setTracks] = useState();
@@ -20,7 +21,7 @@ export default () => {
         <h1>Quadrivia</h1>
         {!tracks ? <img src={logo} className="App-logo" alt="logo" /> : null}
         {!tracks ? <Search setPlaylist={setPlaylist} /> : null}
-        {tracks ? <Question tracks={tracks} /> : null}
+        {tracks ? <Question tracks={shuffle(tracks)} /> : null}
       </header>
     </div>
   );

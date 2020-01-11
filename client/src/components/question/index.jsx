@@ -3,20 +3,14 @@ import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 
 import { getQuestion } from '../../utils/apiRequests';
+import { shuffle } from '../../utils';
+
 import './index.css';
 
 const getMusic = (id) => <ReactPlayer url={id} playing />;
 
-function shuffle(arr) {
-  const a = arr;
-  for (let i = a.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-export default function Question({ tracks }) {
+export default function Question({ tracks: t }) {
+  const tracks = shuffle(t);
   const [stage, setStage] = useState(0);
   const [question, setQuestion] = useState(null);
   const [options, setOptions] = useState([]);
