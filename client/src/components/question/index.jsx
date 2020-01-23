@@ -4,44 +4,37 @@ import PropTypes from 'prop-types';
 import ColorThief from 'colorthief';
 
 import { getQuestion } from '../../utils/apiRequests';
-import { shuffle } from '../../utils';
+
+import Choices from '../choices';
 
 import './index.css';
 
+const calculateTextColour = ([r, g, b]) => {
+  const o = Math.round(((r * 299) + (g * 587) + (b * 114)) / 1000);
+  return (o > 125) ? 'black' : 'white';
+};
 
 const getMusic = (id) => <ReactPlayer url={id} playing />;
-let colour;
-export default function Question({ track, setColour, shiftQuestion }) {
-  // console.log('render Question')
+
+export default function Question({
+  track, setColour, shiftQuestion, backgroundColour,
+}) {
   const [stage, setStage] = useState(0);
-  const [question, setQuestion] = useState({ question: undefined, options: [] });
+  const [question, setQuestion] = useState();
 
   const refContainer = useRef(null);
 
-  const colorThief = new ColorThief();
-
   const handleImageLoaded = () => {
+    const colorThief = new ColorThief();
     const img = refContainer.current;
-
-    img.addEventListener('load', () => {
-      const domColour = colorThief.getColor(img, 100);
-      if (colour !== domColour) {
-        setColour(domColour.toString());
-        colour = domColour;
-      }
-    });
+    setColour(colorThief.getColor(img, 10));
   };
 
   useEffect(() => {
     if (track) {
       const fetchData = async () => {
         const { data } = await getQuestion(track);
-        const { answer, incorrectAnswers } = data;
-        const options = shuffle([
-          { hidden: <p>{answer}</p>, revealed: <p className="text-success">{answer}</p> },
-          ...incorrectAnswers.map((option) => ({ hidden: <p>{option}</p>, revealed: <p className="text-danger">{option}</p> })),
-        ]);
-        setQuestion({ question: data, options });
+        setQuestion(data);
       };
       fetchData();
     }
@@ -55,40 +48,26 @@ export default function Question({ track, setColour, shiftQuestion }) {
       shiftQuestion();
     }
   };
-  let q;
 
-  const optionTags = question.options.map((option) => (
-    <div className="col-sm">
-      {stage === 0 ? option.hidden : option.revealed}
-    </div>
-  ));
+  let content;
 
-  if (question.question) {
-    const answers = (
-      <div className="container">
-        <div className="row">
-          {optionTags[0]}
-          {optionTags[1]}
-        </div>
-        <div className="row">
-          {optionTags[2]}
-          {optionTags[3]}
-        </div>
-      </div>
-    );
-    q = (
+  if (question) {
+    const { answer, incorrectAnswers } = question;
+    const textColour = calculateTextColour(backgroundColour);
+    const answers = <Choices isRevealed={stage === 1} answer={answer} incorrectAnswers={incorrectAnswers} textColour={textColour} />;
+    content = (
       <div>
-        <h1>{question.question.message}</h1>
-        <img onLoad={handleImageLoaded} crossOrigin="anonymous" ref={refContainer} src={question.question.imgUrl} className="Record" alt="albumImage" />
+        <h1 style={{ color: textColour }}> {question.message}</h1>
+        <img onLoad={handleImageLoaded} crossOrigin="anonymous" ref={refContainer} src={question.imgUrl} className="Record" alt="albumImage" />
         {answers}
-        {getMusic(question.question.previewUrl)}
+        {getMusic(question.previewUrl)}
       </div>
     );
   }
 
   return (
     <div role="button" tabIndex={0} onKeyPress={() => handleClick()} onClick={() => handleClick()}>
-      {q}
+      {content}
     </div>
   );
 }
@@ -103,4 +82,5 @@ Question.propTypes = {
   }).isRequired,
   setColour: PropTypes.func.isRequired,
   shiftQuestion: PropTypes.func.isRequired,
+  backgroundColour: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
