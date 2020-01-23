@@ -8,20 +8,32 @@ import { getTracks } from './utils/apiRequests';
 import { shuffle } from './utils';
 
 export default () => {
+  console.log('render App')
   const [tracks, setTracks] = useState();
+  const [colour, setColour] = useState('40,44,52');
 
   const setPlaylist = async (id) => {
     const { data } = await getTracks(id);
-    setTracks(data);
+    setTracks(shuffle(data));
+  };
+
+  const foo = () => {
+    if (tracks.length === 1) {
+      setTracks(null);
+    } else {
+      setTracks(tracks.splice(1));
+    }
+    // setColour(colour);
   };
 
   return (
-    <div className="App">
+    <div style={{ background: `rgb(${colour})` }} className="App">
       <header className="App-header">
         <h1>Quadrivia</h1>
         {!tracks ? <img src={logo} className="App-logo" alt="logo" /> : null}
         {!tracks ? <Search setPlaylist={setPlaylist} /> : null}
-        {tracks ? <Question tracks={shuffle(tracks)} /> : null}
+        {tracks && tracks.length > 0 ? <Question setColour={setColour} shiftQuestion={() => foo()} track={tracks[0]} /> : null}
+        {/* {tracks ? React.createElement(Question, { setColour, shiftQuestion: () => foo(), track: tracks[0] }, null) : null} */}
       </header>
     </div>
   );
