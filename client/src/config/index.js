@@ -9,7 +9,7 @@ const port = 4200;
 
 const origins = {
 //   cloud: 'https://reunite.eu-gb.cf.appdomain.cloud',
-  local: `http://localhost:${port}`,
+  local: `https://us-central1-quadrivia-ed25a.cloudfunctions.net/bigben`,
 //   'local-network': `http://169.254.XXX.XX:${port}`, // Set this to your Private IP address
 };
 

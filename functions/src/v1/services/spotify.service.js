@@ -1,7 +1,9 @@
 const rp = require('request-promise');
 
-const clientId = process.env.SPOTIFY_CLIENT_ID;
-const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+// const clientId = process.env.SPOTIFY_CLIENT_ID;
+// const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const clientId = '55b46a80916e4ed4991986cc0675326c';
+const clientSecret = '81881f31316545ebabc036b4c8e75646';
 
 let token;
 
@@ -34,6 +36,9 @@ const getTokenId = async () => {
 };
 
 const search = async (q) => {
+  console.log('clientId', clientId)
+  console.log('clientSecret', clientSecret)
+  // return q;
   const tokenId = await getTokenId();
   const options = {
     uri: `https://api.spotify.com/v1/search?q=${q}&type=playlist`,

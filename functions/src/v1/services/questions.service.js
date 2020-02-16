@@ -9,9 +9,7 @@ function shuffle(arr) {
   return a;
 }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * Math.floor(max - min)) + min;
-}
+const getRandomInt = (min, max) => Math.floor(Math.random() * Math.floor(max - min)) + min;
 
 const getIncorrectYears = (correctYear) => {
   const maxDifferential = 7;
@@ -120,10 +118,10 @@ const getRandomQuestionGenerator = () => {
     getArtistQuestion,
     getAlbumQuestion,
   ];
-  return questionTypes[Math.floor(Math.random() * questionTypes.length)];
+  return questionTypes[getRandomInt(0, questionTypes.length)];
 };
 
-const getQuestions = (track) => getRandomQuestionGenerator()(track);
+const getQuestions = track => getRandomQuestionGenerator()(track);
 
 module.exports = {
   getQuestions,

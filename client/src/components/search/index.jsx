@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { search } from '../../utils/apiRequests';
 
+import './index.css';
+
+// React.initializeTouchEvents(true);
 const Search = ({ setPlaylist }) => {
   const [playlists, setPlaylists] = useState([]);
   const [query, setQuery] = useState('');
@@ -20,7 +23,7 @@ const Search = ({ setPlaylist }) => {
   const handleChange = (e) => setQuery(e.target.value);
 
   const playlistsDiv = playlists.map(({ name, id, imgUrl }) => (
-    <div role="button" tabIndex={0} onClick={() => setPlaylist(id)} onKeyPress={() => setPlaylist(id)}>
+    <div style={{'outline':'0'}} role="button" tabIndex={0} onClick={() => setPlaylist(id)} onKeyPress={() => setPlaylist(id)}>
       <h1>{name}</h1>
       <img src={imgUrl} alt={name} />
     </div>
@@ -30,7 +33,7 @@ const Search = ({ setPlaylist }) => {
     <div>
       <form className="example">
         <input type="text" onChange={handleChange} placeholder="Search.." name="search" />
-        <button type="submit" onClick={handleSubmit}>Search</button>
+        <button type="submit" onTouchStart={handleSubmit} onClick={handleSubmit}>Search</button>
       </form>
       {playlistsDiv}
     </div>

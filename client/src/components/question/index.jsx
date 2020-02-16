@@ -17,7 +17,7 @@ const calculateTextColour = ([r, g, b]) => {
 const getMusic = (id) => <ReactPlayer url={id} playing />;
 
 export default function Question({
-  track, setColour, shiftQuestion, backgroundColour,
+  track, setColour, shiftQuestion, textColour,
 }) {
   const [stage, setStage] = useState(0);
   const [question, setQuestion] = useState();
@@ -53,11 +53,10 @@ export default function Question({
 
   if (question) {
     const { answer, incorrectAnswers } = question;
-    const textColour = calculateTextColour(backgroundColour);
     const answers = <Choices isRevealed={stage === 1} answer={answer} incorrectAnswers={incorrectAnswers} textColour={textColour} />;
     content = (
-      <div>
-        <h1 style={{ color: textColour }}> {question.message}</h1>
+      <div className="question">
+        <h1 style={{ 'font-size': '5vw', color: textColour }}>{question.message}</h1>
         <img onLoad={handleImageLoaded} crossOrigin="anonymous" ref={refContainer} src={question.imgUrl} className="Record" alt="albumImage" />
         {answers}
         {getMusic(question.previewUrl)}
@@ -66,7 +65,7 @@ export default function Question({
   }
 
   return (
-    <div role="button" tabIndex={0} onKeyPress={() => handleClick()} onClick={() => handleClick()}>
+    <div style={{'outline':'0'}} role="button" tabIndex={0} onKeyPress={() => handleClick()} onClick={() => handleClick()}>
       {content}
     </div>
   );
@@ -82,5 +81,5 @@ Question.propTypes = {
   }).isRequired,
   setColour: PropTypes.func.isRequired,
   shiftQuestion: PropTypes.func.isRequired,
-  backgroundColour: PropTypes.arrayOf(PropTypes.number).isRequired,
+  textColour: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
