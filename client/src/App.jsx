@@ -31,7 +31,6 @@ export default () => {
   };
 
   return (
-    // <div style={{ background: `rgb(${colour.toString()})` }} className="App">
     <div style={{ 'background': `rgb(${colour.toString()}) url(connected.png)` }} className="App">
       <header className="App-header">
         <h1 style={{ 'font-size': '5vw', color: calculateTextColour(colour) }}>Quadrivia</h1>

@@ -1,4 +1,4 @@
-const port = 4200;
+const port = 5000;
 
 // For debug
 // console.log('process.env');
@@ -8,9 +8,8 @@ const port = 4200;
 // console.log(process.env.REACT_APP_SERVER_LOCATION);
 
 const origins = {
-//   cloud: 'https://reunite.eu-gb.cf.appdomain.cloud',
-  local: `https://us-central1-quadrivia-ed25a.cloudfunctions.net/bigben`,
-//   'local-network': `http://169.254.XXX.XX:${port}`, // Set this to your Private IP address
+  local: `http://localhost:${port}/quadrivia-ed25a/us-central1`,
+  cloud: `https://us-central1-quadrivia-ed25a.cloudfunctions.net`,
 };
 
 // const serverLocation = process.env.REACT_APP_SERVER_LOCATION || 'local';

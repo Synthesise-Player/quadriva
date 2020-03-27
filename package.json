@@ -7,9 +7,10 @@
     "start": "firebase serve",
     "start:functions": "firebase serve --only functions",
     "start:hosting": "firebase serve --only hosting",
+    "start:dev": "concurrently \"npm run start:functions\" \"cd client && npm run start\"",
     "test": "concurrently \"cd server && npm t\" \"cd client && npm t\"",
     "lint": "concurrently \"cd server && npm run lint\" \"cd client && npm run lint\"",
-    "deploy:cloud": "firebase deploy",
+    "deploy": "firebase deploy",
     "build": "cd client && npm run build"
   },
   "repository": {

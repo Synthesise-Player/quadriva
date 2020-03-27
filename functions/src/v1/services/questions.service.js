@@ -85,7 +85,7 @@ const getArtistQuestion = async (track) => {
   const incorrectAnswers = await getIncorrectArtists(artist.id);
   return {
     id,
-    message: 'Which artist does this track belong too?',
+    message: 'Which artist does this track belong to?',
     previewUrl,
     answer: artist.name,
     incorrectAnswers,
@@ -103,7 +103,7 @@ const getAlbumQuestion = async (track) => {
   const incorrectAnswers = await getIncorrectAlbums(artist.id, trackId, albumName);
   return {
     trackId,
-    message: 'Which album does this track belong too?',
+    message: 'Which album does this track belong to?',
     previewUrl,
     answer: albumName,
     incorrectAnswers,

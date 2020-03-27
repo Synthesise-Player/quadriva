@@ -5,10 +5,9 @@ import { search } from '../../utils/apiRequests';
 
 import './index.css';
 
-// React.initializeTouchEvents(true);
 const Search = ({ setPlaylist }) => {
   const [playlists, setPlaylists] = useState([]);
-  const [query, setQuery] = useState('');
+  let query = '';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +19,10 @@ const Search = ({ setPlaylist }) => {
     }
   };
 
-  const handleChange = (e) => setQuery(e.target.value);
+  const handleChange = (e) => {
+    console.log(e.target);
+    query = e.target.value;
+  }
 
   const playlistsDiv = playlists.map(({ name, id, imgUrl }) => (
     <div style={{'outline':'0'}} role="button" tabIndex={0} onClick={() => setPlaylist(id)} onKeyPress={() => setPlaylist(id)}>

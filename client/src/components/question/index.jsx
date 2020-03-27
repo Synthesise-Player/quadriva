@@ -6,15 +6,9 @@ import ColorThief from 'colorthief';
 import { getQuestion } from '../../utils/apiRequests';
 
 import Choices from '../choices';
+import { Alphabet, isValidAlphabet } from '../alphabet';
 
 import './index.css';
-
-const calculateTextColour = ([r, g, b]) => {
-  const o = Math.round(((r * 299) + (g * 587) + (b * 114)) / 1000);
-  return (o > 125) ? 'black' : 'white';
-};
-
-const getMusic = (id) => <ReactPlayer url={id} playing />;
 
 export default function Question({
   track, setColour, shiftQuestion, textColour,
@@ -52,14 +46,21 @@ export default function Question({
   let content;
 
   if (question) {
-    const { answer, incorrectAnswers } = question;
-    const answers = <Choices isRevealed={stage === 1} answer={answer} incorrectAnswers={incorrectAnswers} textColour={textColour} />;
+    const { answer, incorrectAnswers, message } = question;
+    let answers;
+    // if (isValidAlphabet({ answer })) {
+    //   answers = <Alphabet isRevealed={stage === 1} answer={answer} incorrectAnswers={incorrectAnswers} textColour={textColour} />;
+    // } else {
+    //   answers = <Choices isRevealed={stage === 1} answer={answer} incorrectAnswers={incorrectAnswers} textColour={textColour} />;
+    // }
+    answers = <Choices isRevealed={stage === 1} answer={answer} incorrectAnswers={incorrectAnswers} textColour={textColour} />;
+  
     content = (
       <div className="question">
         <h1 style={{ 'font-size': '5vw', color: textColour }}>{question.message}</h1>
         <img onLoad={handleImageLoaded} crossOrigin="anonymous" ref={refContainer} src={question.imgUrl} className="Record" alt="albumImage" />
         {answers}
-        {getMusic(question.previewUrl)}
+        <ReactPlayer url={question.previewUrl} playing />
       </div>
     );
   }
