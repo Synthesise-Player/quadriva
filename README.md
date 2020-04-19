@@ -1,5 +1,6 @@
 # Quadriva
 Spotify music quiz
+Play at https://quadrivia.craigforrest.io
 
 ## Getting Started
 
