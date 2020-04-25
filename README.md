@@ -22,15 +22,13 @@ git clone git@github.com:synthesists/quadrivia.git
 Install dependencies
 
 ```bash
-npm install
+npm i
 ```
 
 ### Run the app
 
 ```bash
-npm run build
-
-firebase serve
+npm run start:dev
 ```
 
 The app will be running at `http://localhost:5000`.
@@ -38,10 +36,3 @@ The app will be running at `http://localhost:5000`.
 Alternatively, you can run `npm start` from
 - `/client` to start only the client
 - `/functions` to start only the functions
-
-## Deploying the app
-
-### To IBM Cloud Foundry (for accessing the client site on any internet device connected to the internet)
-
-1. Set up your [Google Firebase](https://firebase.google.com/) account.
-2. `npm run deploy:cloud`
