@@ -1,0 +1,36 @@
+.Question:focus-visible {
+  outline: 0;
+}
+
+.Question {
+  max-width: 600px;
+  outline: 0;
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.Question h1 {
+  font-size: xx-large;
+  color: #376065;
+}
+
+@media only screen and (max-width: 600px) {
+  .Question {
+    max-width: 100%;
+  }
+}
+
+.SpanContainer {
+  display: block;
+  margin: auto;
+
+  height: calc(100vh - 450px);
+  width: calc(100vh - 450px);
+
+  max-height: 300px;
+  max-width: 300px;
+}

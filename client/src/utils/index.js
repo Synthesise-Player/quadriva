@@ -5,6 +5,6 @@ function shuffle(arr) {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
-};
+}
 
 export { shuffle };

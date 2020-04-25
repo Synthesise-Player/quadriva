@@ -1,0 +1,54 @@
+.PlaylistWrapper {
+  min-height: 100px;
+  width: 100%;
+  font-size: small;
+  /* text-align: center; */
+  padding: 10px;
+  color: black;
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+.PlaylistWrapper:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.ImgContainer {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+.ImgContainer img {
+  height: 100%;
+  margin: 0 auto;
+  display: block;
+  float: none;
+  border-radius: 15px;
+}
+
+.Summary {
+  width: calc(100% - 100px);
+  text-align: left;
+  padding-left: 30px;
+  color: #376065;
+}
+
+.col-6 img {
+  width: 50%;
+}
+
+.Name {
+  min-width: 100%;
+  font-weight: bold;
+}
+
+.Owner {
+  width: 100%;
+  font-weight: normal;
+}

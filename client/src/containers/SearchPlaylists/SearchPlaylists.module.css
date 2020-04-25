@@ -1,0 +1,27 @@
+.SearchWrapper {
+  cursor: pointer;
+  font-size: larger;
+  width: 768px;
+  /* padding-top: 50px; */
+  background: white;
+  text-align: left;
+  font-size: x-large;
+}
+
+/* .SearchWrapper img {
+  width: 30%;
+} */
+
+.SearchWrapper h1 {
+  font-size: xx-large;
+}
+
+.QuickPlaylists {
+  padding: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .SearchWrapper {
+    width: 100%;
+  }
+}

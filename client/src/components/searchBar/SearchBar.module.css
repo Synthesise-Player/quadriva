@@ -1,0 +1,20 @@
+.SearchBarWrapper {
+  background-color: #376065;
+  list-style-type: none;
+  text-align: center;
+  padding: 50px;
+}
+
+.SearchBarInner {
+  border-radius: 10px;
+  background-color: white;
+  list-style-type: none;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .SearchBarWrapper {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

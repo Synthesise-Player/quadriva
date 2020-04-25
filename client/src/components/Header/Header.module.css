@@ -1,0 +1,17 @@
+.HeaderWrapper {
+  margin-top: 10%;
+}
+.HeaderWrapper h1 {
+  color: #161e32;
+  color: #e4bb47;
+  margin: 50px;
+  /* margin-top: 50%; */
+  font-size: 15vw;
+}
+
+.HeaderWrapper2 h1 {
+  color: #161e32;
+  color: #e4bb47;
+  margin: 0px;
+  font-size: 15vw;
+}

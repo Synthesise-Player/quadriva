@@ -1,0 +1,35 @@
+.Correct {
+  color: white;
+  background-color: #efd24c;
+  border-color: #efd24c;
+  border-style: solid;
+}
+.Incorrect {
+  color: white;
+  border-color: #376065;
+  background-color: #376065;
+  border-style: solid;
+}
+.Hidden {
+  color: #376065;
+  border-color: #376065;
+  background-color: rgba(230, 230, 230, 0);
+  border-style: solid;
+}
+.Option {
+  border-radius: 30px;
+  box-sizing: border-box;
+  margin-top: 8px;
+
+  width: 90%;
+  min-height: 50px;
+}
+
+.Option:focus {
+  outline: none;
+}
+@media only screen and (max-width: 600px) {
+  .Option {
+    min-width: 100%;
+  }
+}
