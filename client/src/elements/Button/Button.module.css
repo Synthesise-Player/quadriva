@@ -1,5 +1,6 @@
 .ButtonWrapper {
   height: 100%;
+  color: white;
 }
 
 .ButtonWrapper button {
@@ -7,6 +8,7 @@
   height: 100%;
   background-color: transparent;
   border-color: transparent;
+  color: white;
 }
 .ButtonWrapper button:focus {
   outline: none;

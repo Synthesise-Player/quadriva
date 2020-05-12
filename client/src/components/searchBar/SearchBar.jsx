@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import InputField from '../../elements/InputField';
 import Button from '../../elements/Button';
+
 
 import {
   SearchBarWrapper, Input, Submit,
@@ -15,7 +18,7 @@ const SearchBar = ({ handleChange, handleSubmit }) => (
     </div>
     <div className={Submit}>
       <Button name="search" handleClick={handleSubmit}>
-        <span role="img" aria-labelledby="search">🔍</span>
+        <FontAwesomeIcon icon={faSearch} />
       </Button>
     </div>
   </form>
