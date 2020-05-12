@@ -17,6 +17,7 @@
 }
 
 .QuickPlaylists {
+  color: #47596d;
   padding: 15px;
 }
 
@@ -24,4 +25,14 @@
   .SearchWrapper {
     width: 100%;
   }
+}
+
+.SearchW {
+  background-color: #47596d;
+  list-style-type: none;
+  text-align: center;
+  padding: 50px 30px 50px 30px;
+  list-style-type: none;
+  text-align: center;
+  display: flex;
 }

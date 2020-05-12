@@ -5,7 +5,7 @@ import { search, getPopularPlaylists, getRecentPlaylists } from '../../utils/api
 import SearchBar from '../../components/searchBar/SearchBar';
 import Playlist from '../../components/Playlist';
 
-import { SearchWrapper, QuickPlaylists } from './SearchPlaylists.module.css';
+import { SearchWrapper, QuickPlaylists, SearchW } from './SearchPlaylists.module.css';
 import './Game.css';
 
 let query = '';
@@ -69,7 +69,9 @@ const Search = () => {
     <div className="App">
       <header className="App-header">
         <div className={SearchWrapper}>
-          <SearchBar handleChange={handleSearchChange} handleSubmit={handleSearch} />
+          <div className={SearchW}>
+            <SearchBar handleChange={handleSearchChange} handleSubmit={handleSearch} />
+          </div>
           {playlists.map(({
             id, name, owner, images,
           }) => (

@@ -1,16 +1,13 @@
 .InputFieldWrapper input {
-  /* border-radius: 25px; */
-  /* border: 2px solid red; */
-  /* padding-left: 25px; */
   background-color: transparent;
   display: inline-block;
   padding: 10px;
   border: none;
   width: 100%;
-
   outline: none;
+  color: #47596d;
 }
 
 .InputFieldWrapper input::placeholder {
-  color: #161e3270;
+  color: #47596d70;
 }
