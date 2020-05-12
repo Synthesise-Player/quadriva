@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../../../elements/ButtonWhite';
 
-import { Question as CQuestion } from './Setup.module.css';
+import { Question as CQuestion } from './Setup.module.scss';
 import Playlist from '../../../components/Playlist';
 
 import { getPlaylist } from '../../../utils/apiRequests';

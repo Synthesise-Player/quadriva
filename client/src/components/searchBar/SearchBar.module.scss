@@ -1,3 +1,5 @@
+@import '../../assets/master';
+
 .SearchBarWrapper {
   width: 100%;
   border-radius: 10px;
@@ -6,12 +8,11 @@
 }
 
 .Input {
-  background-color: white;
-  color: red;
+  background-color: $light;
   width: 80%;
 }
 
 .Submit {
   width: 20%;
-  background-color: #4d81bd;
+  background-color: $lightAccent;
 }

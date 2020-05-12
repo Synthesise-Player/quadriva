@@ -12,7 +12,7 @@ import Game from '../Game';
 import Home from '../Home';
 import Search from '../SearchPlaylists';
 
-import './App.css';
+import './App.scss';
 
 export default () => (
   <div>

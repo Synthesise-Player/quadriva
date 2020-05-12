@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { InputFieldWrapper } from './InputField.module.css';
+import { InputFieldWrapper } from './InputField.module.scss';
 
 const InputField = ({ handleChange, placeholder }) => (
   <div className={InputFieldWrapper}>

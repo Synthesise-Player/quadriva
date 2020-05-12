@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {
   Option as OptionCSS, Hidden, Correct, Incorrect,
-} from './Option.module.css';
+} from './Option.module.scss';
 
 const Option = ({
   label, isRevealed, isCorrect,

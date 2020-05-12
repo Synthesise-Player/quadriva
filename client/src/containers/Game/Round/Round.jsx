@@ -6,7 +6,7 @@ import { isValidAlphabet, Alphabet } from '../../../components/answers/Alphabet'
 import Record from '../../../elements/Record';
 import { getQuestion } from '../../../utils/apiRequests';
 
-import { Question as CQuestion, SpanContainer } from './Round.module.css';
+import { Question as CQuestion, SpanContainer } from './Round.module.scss';
 
 const getAnswerForm = (isRevealed, answer, incorrectAnswers) => {
   if (isValidAlphabet({ isRevealed, answer, incorrectAnswers })) {

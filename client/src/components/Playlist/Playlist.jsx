@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Record from '../../elements/Record';
+import React from 'react';
 
 import {
   PlaylistWrapper, Summary, Name, Owner, ImgContainer,
-} from './Playlist.module.css';
+} from './Playlist.module.scss';
 
 const Playlist = ({
   handleClick, id, name, imgUrl, owner,

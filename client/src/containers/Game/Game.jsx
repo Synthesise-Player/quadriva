@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-import './Game.css';
+import './Game.scss';
 import Round from './Round';
 import Setup from './Setup';
 import { getTracks } from '../../utils/apiRequests';

@@ -1,3 +1,5 @@
+@import '../../assets/master';
+
 .InputFieldWrapper input {
   background-color: transparent;
   display: inline-block;
@@ -5,9 +7,9 @@
   border: none;
   width: 100%;
   outline: none;
-  color: #47596d;
+  color: $accent;
 }
 
 .InputFieldWrapper input::placeholder {
-  color: #47596d70;
+  color: lighten($accent, 20);
 }

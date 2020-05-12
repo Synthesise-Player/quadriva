@@ -1,19 +1,21 @@
+@import '../../../assets/master';
+
 .Correct {
-  color: white;
-  background-color: #efd24c;
-  border-color: #efd24c;
+  color: $light;
+  background-color: $lightAccent;
+  border-color: $lightAccent;
   border-style: solid;
 }
 .Incorrect {
-  color: white;
-  border-color: #376065;
-  background-color: #376065;
+  color: $light;
+  border-color: $accent;
+  background-color: $accent;
   border-style: solid;
 }
 .Hidden {
-  color: #376065;
-  border-color: #376065;
-  background-color: rgba(230, 230, 230, 0);
+  color: $accent;
+  border-color: $accent;
+  background-color: transparent;
   border-style: solid;
 }
 .Option {

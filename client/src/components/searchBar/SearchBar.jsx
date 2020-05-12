@@ -6,7 +6,7 @@ import Button from '../../elements/Button';
 
 import {
   SearchBarWrapper, Input, Submit,
-} from './SearchBar.module.css';
+} from './SearchBar.module.scss';
 
 const SearchBar = ({ handleChange, handleSubmit }) => (
   <form className={SearchBarWrapper}>

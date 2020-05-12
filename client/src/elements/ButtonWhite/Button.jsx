@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ButtonWrapper, Pink } from './Button.module.css';
+import { ButtonWrapper, Pink } from './Button.module.scss';
 
 const Button = ({
   type, name, handleClick, children, value, isPink,

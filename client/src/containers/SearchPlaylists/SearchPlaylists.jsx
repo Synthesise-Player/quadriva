@@ -5,8 +5,8 @@ import { search, getPopularPlaylists, getRecentPlaylists } from '../../utils/api
 import SearchBar from '../../components/searchBar/SearchBar';
 import Playlist from '../../components/Playlist';
 
-import { SearchWrapper, QuickPlaylists, SearchW } from './SearchPlaylists.module.css';
-import './Game.css';
+import { SearchWrapper, QuickPlaylists, SearchW } from './SearchPlaylists.module.scss';
+import './Game.scss';
 
 let query = '';
 

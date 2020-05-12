@@ -1,3 +1,5 @@
+@import '../../../assets/master.scss';
+
 .Question:focus-visible {
   outline: 0;
 }
@@ -15,7 +17,7 @@
 
 .Question h1 {
   font-size: xx-large;
-  color: #161e32;
+  color: $darkAccent;
 }
 
 @media only screen and (max-width: 600px) {
