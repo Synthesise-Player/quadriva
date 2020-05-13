@@ -1,18 +1,13 @@
-@import '../../assets/master';
+@import 'assets/master';
 
 .SearchWrapper {
   cursor: pointer;
   font-size: larger;
   width: 768px;
-  /* padding-top: 50px; */
-  background: white;
+  background: $background;
   text-align: left;
   font-size: x-large;
 }
-
-/* .SearchWrapper img {
-  width: 30%;
-} */
 
 .SearchWrapper h1 {
   font-size: xx-large;

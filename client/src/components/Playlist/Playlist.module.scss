@@ -1,18 +1,17 @@
-@import '../../assets/master';
+@import 'assets/master';
 
 .PlaylistWrapper {
   min-height: 100px;
   width: 100%;
   font-size: small;
   padding: 10px;
-  color: $dark;
   display: flex;
   align-items: center;
   outline: none;
 }
 
 .PlaylistWrapper:hover {
-  background-color: lighten($accent, 40%);
+  background-color: lighten($background2, 10%);
 }
 
 .ImgContainer {

@@ -1,4 +1,4 @@
-@import '../../assets/master';
+@import 'assets/master';
 
 .InputFieldWrapper input {
   background-color: transparent;
@@ -11,5 +11,5 @@
 }
 
 .InputFieldWrapper input::placeholder {
-  color: lighten($accent, 20);
+  color: $darkAccent;
 }

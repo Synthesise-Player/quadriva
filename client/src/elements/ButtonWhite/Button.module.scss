@@ -1,7 +1,6 @@
-@import '../../assets/master';
+@import 'assets/master';
 
 .ButtonWrapper button {
-  /* padding: 5px; */
   padding-left: 20px;
   padding-right: 20px;
   margin: auto;
@@ -17,25 +16,3 @@
 .Pink button {
   color: #f5afad;
 }
-
-/* .ButtonWrapper button {
-  padding: 0;
-  color: #a0a0a0;
-  font-size: 1rem;
-  letter-spacing: +0.5px;
-  text-transform: uppercase;
-  border: none;
-  background: white;
-}
-.ButtonWrapper button:hover {
-  cursor: pointer;
-}
-.ButtonWrapper button:active,
-.ButtonWrapper button:focus {
-  outline: none;
-}
-.FormButtonWrapper {
-  position: absolute;
-  top: 3rem;
-  right: 0;
-} */

@@ -6,7 +6,9 @@ import { isValidAlphabet, Alphabet } from '../../../components/answers/Alphabet'
 import Record from '../../../elements/Record';
 import { getQuestion } from '../../../utils/apiRequests';
 
-import { Question as CQuestion, SpanContainer } from './Round.module.scss';
+import {
+  Question as CQuestion, SpanContainer, QuestionWrapper, RecordContainer, AnswersWrapper,
+} from './Round.module.scss';
 
 const getAnswerForm = (isRevealed, answer, incorrectAnswers) => {
   if (isValidAlphabet({ isRevealed, answer, incorrectAnswers })) {
@@ -50,11 +52,17 @@ const Question = ({ track, shiftQuestion, setUrl }) => {
 
   return (
     <div className={CQuestion} onClick={handleClick} onKeyPress={handleClick} role="button" tabIndex={0}>
-      <h1>{questionText}</h1>
-      <div className={SpanContainer}>
-        <Record url={recordImage} />
+      <div className={QuestionWrapper}>
+        <h1>{questionText}</h1>
       </div>
-      {getAnswerForm(isRevealed, answer, incorrectAnswers)}
+      <div className={SpanContainer}>
+        <div className={RecordContainer}>
+          <Record url={recordImage} />
+        </div>
+      </div>
+      <div className={AnswersWrapper}>
+        {getAnswerForm(isRevealed, answer, incorrectAnswers)}
+      </div>
     </div>
   );
 };

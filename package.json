@@ -11,6 +11,7 @@
     "test": "concurrently \"cd server && npm t\" \"cd client && npm t\"",
     "lint": "concurrently \"cd server && npm run lint\" \"cd client && npm run lint\"",
     "deploy": "npm run build && firebase deploy",
+    "deploy:client": "npm run build && firebase deploy --only hosting",
     "build": "cd client && npm run build"
   },
   "repository": {

@@ -1,23 +1,17 @@
-@import '../../../assets/master';
+@import 'assets/master';
 
 .Question:focus-visible {
   outline: 0;
 }
 
 .Question {
-  max-width: 600px;
+  width: 100%;
   outline: 0;
-
   margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
 }
 
 .Question h1 {
   font-size: xx-large;
-  color: $accent;
 }
 
 @media only screen and (max-width: 600px) {
@@ -27,12 +21,53 @@
 }
 
 .SpanContainer {
-  display: block;
   margin: auto;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 
-  height: calc(100vh - 450px);
-  width: calc(100vh - 450px);
+  height: calc(100vh - 520px);
+  width: calc(100vh - 520px);
+  display: flex;
+}
 
-  max-height: 300px;
+.RecordContainer {
   max-width: 300px;
+  max-height: 300px;
+}
+
+.QuestionWrapper {
+  background-color: $accent;
+  width: 100%;
+  height: 150px;
+  display: flex;
+}
+
+.QuestionWrapper h1 {
+  color: $light;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+  font-size: 1.7em;
+}
+
+.AnswersWrapper {
+  padding-bottom: 20px;
+  display: flex;
+  height: calc(100vh - 150px - (100vh - 520px));
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-height: 650px) {
+  .SpanContainer {
+    display: none;
+  }
+
+  .AnswersWrapper {
+    display: flex;
+    height: calc(100vh - 150px);
+    align-items: center;
+    justify-content: center;
+  }
 }
