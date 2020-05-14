@@ -20,14 +20,15 @@ export default () => {
   const [setupComplete, setSetupComplete] = useState(false);
 
   useEffect(() => {
-    getTracks(playlistId).then(({ data }) => {
-      setTracks(shuffle(data));
-    });
-  }, [playlistId]);
+    if (setupComplete === false) {
+      getTracks(playlistId).then(({ data }) => setTracks(shuffle(data)));
+    }
+  }, [playlistId, setupComplete]);
 
   const shiftTracks = () => {
     if (tracks.length === 1) {
       setTracks([]);
+      setSetupComplete(false);
     } else {
       setTracks(tracks.splice(1));
     }
