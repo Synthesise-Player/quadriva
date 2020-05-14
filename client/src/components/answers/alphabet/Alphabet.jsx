@@ -14,9 +14,7 @@ const getCorrectCharacter = (answer) => {
 
 const isValidAlphabet = ({ answer }) => !!`${answer}`.replace(/(?:(the|an) +)/gi, '').charAt(0).match(/[a-z]/i);
 
-const Alphabet = ({
-  answer, isRevealed,
-}) => {
+const Alphabet = ({ answer, isRevealed, onClick }) => {
   const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'QV', 'W', 'X', 'YZ'];
 
   const correctCharacter = getCorrectCharacter(answer);
@@ -24,7 +22,13 @@ const Alphabet = ({
   const choices = alphabet.map((label) => ({ label, isCorrect: label.includes(correctCharacter) }));
   const options = (choices.map(({ isCorrect, label }) => (
     <div className="col-3">
-      <Option label={label} isRevealed={isRevealed} isCorrect={isCorrect} key={label} />
+      <Option
+        onClick={() => onClick(label === correctCharacter)}
+        label={label}
+        isRevealed={isRevealed}
+        isCorrect={isCorrect}
+        key={label}
+      />
     </div>
   )));
 
@@ -40,6 +44,7 @@ const Alphabet = ({
 Alphabet.propTypes = {
   answer: PropTypes.string.isRequired,
   isRevealed: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export { isValidAlphabet, Alphabet };

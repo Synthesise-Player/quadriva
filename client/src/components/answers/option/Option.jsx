@@ -6,7 +6,7 @@ import {
 } from './Option.module.scss';
 
 const Option = ({
-  label, isRevealed, isCorrect,
+  label, isRevealed, isCorrect, onClick,
 }) => {
   const colourSchemes = [OptionCSS];
 
@@ -16,7 +16,7 @@ const Option = ({
     colourSchemes.push(Hidden);
   }
   return (
-    <button className={colourSchemes.join(' ')} type="button">
+    <button onClick={onClick} className={colourSchemes.join(' ')} type="button">
       {label}
     </button>
   );
@@ -26,6 +26,7 @@ Option.propTypes = {
   label: PropTypes.string.isRequired,
   isRevealed: PropTypes.bool.isRequired,
   isCorrect: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Option;

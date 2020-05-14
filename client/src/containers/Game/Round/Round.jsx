@@ -5,27 +5,45 @@ import { Choices, isValidChoices } from '../../../components/answers/Choices';
 import { isValidAlphabet, Alphabet } from '../../../components/answers/Alphabet';
 import Record from '../../../elements/Record';
 import { getQuestion } from '../../../utils/apiRequests';
+import Scoreboard from '../../../components/Scoreboard';
 
 import {
-  Question as CQuestion, SpanContainer, QuestionWrapper, RecordContainer, AnswersWrapper,
+  Question as CQuestion, SpanContainer, QuestionWrapper, RecordContainer, AnswersWrapper, ScoreboardWrapper,
 } from './Round.module.scss';
 
-const getAnswerForm = (isRevealed, answer, incorrectAnswers) => {
+const getAnswerForm = (isRevealed, answer, incorrectAnswers, onClick) => {
   if (isValidAlphabet({ isRevealed, answer, incorrectAnswers })) {
-    return <Alphabet isRevealed={isRevealed} answer={answer} incorrectAnswers={incorrectAnswers} />;
+    return (
+      <Alphabet
+        onClick={onClick}
+        isRevealed={isRevealed}
+        answer={answer}
+        incorrectAnswers={incorrectAnswers}
+      />
+    );
   }
   if (isValidChoices({ isRevealed, answer, incorrectAnswers })) {
-    return <Choices isRevealed={isRevealed} answer={answer} incorrectAnswers={incorrectAnswers} />;
+    return (
+      <Choices
+        onClick={onClick}
+        isRevealed={isRevealed}
+        answer={answer}
+        incorrectAnswers={incorrectAnswers}
+      />
+    );
   }
   return null;
 };
 
-const Question = ({ track, shiftQuestion, setUrl }) => {
+const Question = ({
+  track, shiftQuestion, setUrl, maxScore,
+}) => {
   const [isRevealed, setIsRevealed] = useState(false);
   const [questionText, setQuestionText] = useState();
   const [recordImage, setRecordImage] = useState();
   const [answer, setAnswer] = useState('');
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     if (track) {
@@ -41,9 +59,14 @@ const Question = ({ track, shiftQuestion, setUrl }) => {
   }, [track, setUrl]);
 
 
-  const handleClick = () => {
+  const handleClick = (isCorrect) => {
     if (!isRevealed) {
       setIsRevealed(true);
+      if (isCorrect) {
+        setScore(score + 1);
+      } else {
+        setScore(0);
+      }
       setTimeout(() => shiftQuestion(), 2000);
     }
   };
@@ -51,9 +74,12 @@ const Question = ({ track, shiftQuestion, setUrl }) => {
   if (!questionText) return null;
 
   return (
-    <div className={CQuestion} onClick={handleClick} onKeyPress={handleClick} role="button" tabIndex={0}>
+    <div className={CQuestion} role="button" tabIndex={0}>
       <div className={QuestionWrapper}>
         <h1>{questionText}</h1>
+      </div>
+      <div className={ScoreboardWrapper}>
+        <Scoreboard numberOfChunks={maxScore} revealedChunks={score} />
       </div>
       <div className={SpanContainer}>
         <div className={RecordContainer}>
@@ -61,7 +87,7 @@ const Question = ({ track, shiftQuestion, setUrl }) => {
         </div>
       </div>
       <div className={AnswersWrapper}>
-        {getAnswerForm(isRevealed, answer, incorrectAnswers)}
+        {getAnswerForm(isRevealed, answer, incorrectAnswers, handleClick)}
       </div>
     </div>
   );
@@ -79,4 +105,5 @@ Question.propTypes = {
   }).isRequired,
   shiftQuestion: PropTypes.func.isRequired,
   setUrl: PropTypes.func.isRequired,
+  maxScore: PropTypes.number.isRequired,
 };

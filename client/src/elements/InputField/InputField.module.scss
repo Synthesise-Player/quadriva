@@ -11,5 +11,5 @@
 }
 
 .InputFieldWrapper input::placeholder {
-  color: $darkAccent;
+  color: transparentize($accent, 0.5);
 }

@@ -44,7 +44,7 @@ export default () => {
         <div className="Game">
           {!setupComplete ? <Setup completeSetup={completeSetup} playlistId={playlistId} /> : null}
           {setupComplete && tracks.length > 0
-            ? <Round setUrl={setUrl} shiftQuestion={shiftTracks} track={tracks[0]} />
+            ? <Round setUrl={setUrl} shiftQuestion={shiftTracks} track={tracks[0]} maxScore={12} />
             : null}
         </div>
       </header>

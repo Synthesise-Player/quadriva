@@ -7,21 +7,27 @@ import Option from '../option';
 import './index.css';
 
 const Choices = ({
-  answer, incorrectAnswers, isRevealed,
+  answer, incorrectAnswers, isRevealed, onClick,
 }) => {
   const [shuffledChoices, setShuffledChoices] = useState([]);
 
   useEffect(() => {
+    const incorrectChoices = incorrectAnswers.map((label) => ({ isCorrect: false, label }));
     const choices = [
       { isCorrect: true, label: answer },
-      ...incorrectAnswers.map((label) => ({ isCorrect: false, label })),
+      ...incorrectChoices,
     ];
-
     setShuffledChoices(shuffle(choices));
   }, [answer, incorrectAnswers]);
 
   const options = (shuffledChoices.map(({ isCorrect, label }) => (
-    <Option label={label} isRevealed={isRevealed} isCorrect={isCorrect} key={label} />
+    <Option
+      onClick={() => onClick(label === answer)}
+      label={label}
+      isRevealed={isRevealed}
+      isCorrect={isCorrect}
+      key={label}
+    />
   )));
 
   return (
@@ -35,6 +41,7 @@ Choices.propTypes = {
   answer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
   isRevealed: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 const isValidChoices = () => true;
