@@ -6,7 +6,7 @@ import Playlist from '../../../components/Playlist';
 
 import { getPlaylist } from '../../../utils/apiRequests';
 
-const Setup = ({ completeSetup, playlistId }) => {
+const Setup = ({ completeSetup, playlistId, bestStreak }) => {
   const [playlist, setPlaylist] = useState();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Setup = ({ completeSetup, playlistId }) => {
           />
         )
         : null }
-
+      {bestStreak > 0 ? `Your longest streak was ${bestStreak}!` : null}
       <Button handleClick={completeSetup}>
         Click here to start
       </Button>

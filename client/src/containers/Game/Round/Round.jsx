@@ -36,7 +36,7 @@ const getAnswerForm = (isRevealed, answer, incorrectAnswers, onClick) => {
 };
 
 const Question = ({
-  track, shiftQuestion, setUrl, maxScore,
+  track, shiftQuestion, setUrl, maxScore, updateScore,
 }) => {
   const [isRevealed, setIsRevealed] = useState(false);
   const [questionText, setQuestionText] = useState();
@@ -44,6 +44,8 @@ const Question = ({
   const [answer, setAnswer] = useState('');
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [score, setScore] = useState(0);
+
+  useEffect(() => updateScore(score), [updateScore, score]);
 
   useEffect(() => {
     if (track) {
@@ -106,4 +108,5 @@ Question.propTypes = {
   shiftQuestion: PropTypes.func.isRequired,
   setUrl: PropTypes.func.isRequired,
   maxScore: PropTypes.number.isRequired,
+  updateScore: PropTypes.func.isRequired,
 };

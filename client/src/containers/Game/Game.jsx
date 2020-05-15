@@ -11,6 +11,8 @@ import { shuffle } from '../../utils';
 
 import MediaPlayer from '../../elements/mediaPlayer/mediaPlayer';
 
+let bestStreak = 0;
+
 export default () => {
   const { playlistId } = useParams();
   const [tracks, setTracks] = useState([]);
@@ -39,15 +41,19 @@ export default () => {
     setSetupComplete(true);
   };
 
+  const updateScore = (score) => {
+    bestStreak = Math.max(bestStreak, score);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <div className="Game">
           {!setupComplete || tracks.length === 0
-            ? <Setup completeSetup={completeSetup} playlistId={playlistId} />
+            ? <Setup bestStreak={bestStreak} completeSetup={completeSetup} playlistId={playlistId} />
             : null}
           {setupComplete && tracks.length > 0
-            ? <Round setUrl={setUrl} shiftQuestion={shiftTracks} track={tracks[0]} maxScore={12} />
+            ? <Round updateScore={updateScore} setUrl={setUrl} shiftQuestion={shiftTracks} track={tracks[0]} maxScore={12} />
             : null}
         </div>
       </header>
